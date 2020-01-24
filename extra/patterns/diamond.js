@@ -22,7 +22,7 @@ function diamond(n)
           console.log(row);
        }
 
-       for( let i=n-1; i>0; i-- )
+       for( let i=n; i>0; i-- )
        {
           let row = " ";
 
