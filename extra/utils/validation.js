@@ -1,59 +1,36 @@
+let validcount = 0;
+let invalidcount = 0;
+let valid = [];
+let invalid = [];
 
-const users = [
-    {
-        traineeEmail: "ujjwal.jain@successive.tech",
-        reviewerEmail:"preet.saxena@successive.tech",
-    },
-    {
-        traineeEmail: "ujjwal.jainsuccessive.tech",
-        reviewerEmail:"preeta@succesive.tech",
-    },
-    {
-        traineeEmail: "ujju.jain@successive.tech",
-        reviewerEmail:"preet@successive.tech",
-    },
+import {validateEmail} from"./helpers";
 
-];
-a = 0;
-b = 0;
-valid = [];
-invalid = [];
-
-function validateEmail(email)
-{
-    const re =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((successive.tech))$/;
-    x = re.test(email);
-
-    if( x == true ) 
-        valid.push(email);
-    else 
-        invalid.push(email);
-    
-    return(x);
+export default function validateUsers(users){
+users.forEach((element) => {
+const {traineeEmail, reviewerEmail} = element;
+let check = validateEmail(traineeEmail);
+if( check == true){
+validcount++;
+valid.push(traineeEmail);
 }
-
-function validateUsers(users)
-{
-    users.forEach((element) => {
-        const {traineeEmail, reviewerEmail} = element;
-        check = validateEmail(traineeEmail);
-
-        if( check == true)
-             a++;
-        else
-             b++;
-
-        check1 = validateEmail(reviewerEmail);
-        
-        if( check1 == true ) 
-             a++;
-        else
-             b++;
-    })
+else{
+invalidcount++;
+invalid.push(traineeEmail);
 }
-validateUsers(users);
+let check1 = validateEmail(reviewerEmail);
+if( check1 == true){
+validcount++;
+valid.push(reviewerEmail);
+}
+else{
+invalidcount++;
+invalid.push(reviewerEmail);
+}
+})
 
-console.log(`valid Emails \n${valid}`);
-console.log("invlaid Email \n"+invalid);
-console.log("valid count \n"+a);
-console.log("invlaid count \n"+b);
+
+console.log("valid count \n"+validcount);
+console.log ("valid email\n" +valid);
+console.log("invlaid count \n"+invalidcount);
+console.log("invalid email\n"+invalid);
+}
