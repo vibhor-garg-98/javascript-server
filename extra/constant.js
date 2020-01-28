@@ -11,15 +11,15 @@ delete: [],
 
 const users = [
     {
-        traineeEmail: "ujjwal.jain@successive.tech",
+        traineeEmail: "vibhor.garg@successive.tech",
         reviewerEmail:"preet.saxena@successive.tech",
     },
     {
-        traineeEmail: "ujjwal.jainsuccessive.tech",
-        reviewerEmail:"preeta@succesive.tech",
+        traineeEmail: "vibhu.gargsuccessive.tech",
+        reviewerEmail:"preet@succesive.tech",
     },
     {
-        traineeEmail: "ujju.jain@successive.tech",
+        traineeEmail: "vibhu.garg@successive.tech",
         reviewerEmail:"preet@successive.tech",
     }
 ]

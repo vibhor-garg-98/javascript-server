@@ -1,10 +1,11 @@
 import { diamond } from './patterns/'
 import { equilateral } from './patterns/'
 let r = Number(process.argv[2]);
-//patter diamond
-diamond(r);
-//patter equilateral
+
 equilateral(r);
+diamond(r);
+
+
 
 import { hasPermission,validateUser } from './utils';
 
