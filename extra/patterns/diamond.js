@@ -1,4 +1,4 @@
-let r = Number(process.argv[2]);
+//let r = Number(process.argv[2]);
 
 function diamond(n) 
 {
@@ -44,4 +44,4 @@ function diamond(n)
       console.log("wrong input");
     }
 }
-diamond(r);
+export default diamond

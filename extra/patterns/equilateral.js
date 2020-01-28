@@ -1,4 +1,4 @@
-let r = Number(process.argv[2]);
+//let r = Number(process.argv[2]);
 
 function equilateral(n) 
 {
@@ -27,4 +27,5 @@ function equilateral(n)
    console.log("wrong input");
   }
 }
-equilateral(r);
+export default equilateral
+//equilateral(r);
