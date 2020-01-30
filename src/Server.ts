@@ -1,9 +1,10 @@
 import * as express from 'express';
+import IConfig from './config/IConfig';
 
 class Server {
   private app: express.Express;
 
-  constructor(private config) {
+  constructor(private config : IConfig) {
     this.app = express();
   }
 
@@ -30,7 +31,7 @@ class Server {
     const { app } = this;
 
     app.get('/health-check', (req, res) => {
-      console.log("Inside health check");
+      console.log('Inside health check');
       res.send('i am ok');
     });
     return this;
