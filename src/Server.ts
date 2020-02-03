@@ -4,6 +4,7 @@ import * as bodyParser from 'body-parser';
 import errorHandler from './libs/routes/errorHandler';
 import notFoundRoutes from './libs/routes/notFoundRoute';
 import { Request } from 'express';
+import routes from './controllers/trainee/routes';
 
 interface User {
   name: string;
@@ -21,14 +22,14 @@ class Server {
     this.app = express();
   }
 
-  bootstrap = (): Server=> {
+  bootstrap = (): Server => {
     console.log('Inside Bootstrap');
     this.initBodyParser();
     this.setupRoutes();
     return this;
   };
 
-  initBodyParser = () : void => {
+  initBodyParser = (): void => {
     const { app } = this;
 
     console.log('Inside initBodyParser');
@@ -38,7 +39,7 @@ class Server {
     app.use(bodyParser.json());
   };
 
-  run = () :void => {
+  run = (): void => {
     const {
       app,
       config: { port }
@@ -53,16 +54,18 @@ class Server {
     });
   };
 
-  setupRoutes = () : Server => {
+  setupRoutes = (): Server => {
     const { app } = this;
 
-    this.app.get('/health-check', (req: express.Request, res: express.Response ) => {
+    this.app.get(
+      '/health-check',
+      (req: express.Request, res: express.Response) => {
         console.log('Inside health check');
         res.send('I am OK');
       }
     );
 
-    app.use('/api', (req: NewRequest, res : any, next : any) => {
+    app.use('/body-parser', (req: NewRequest, res: any, next: any) => {
       console.log('Inside Middleware');
       req.user = {
         id: '1',
@@ -71,6 +74,8 @@ class Server {
       console.log(req.user);
       res.send('ok');
     });
+
+    app.use('/api', routes);
 
     app.use(notFoundRoutes);
     app.use(errorHandler);
