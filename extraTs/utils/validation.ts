@@ -4,7 +4,7 @@ const valid: string[] = [];
 const invalid: string[] = [];
 
 import { validateEmail } from './helpers';
-import { Iuser } from '../interface';
+import { Iuser } from '../../src/libs/routes/interface';
 
 export default function validateUsers(users: Iuser[]): void {
   users.forEach((element: any) => {
