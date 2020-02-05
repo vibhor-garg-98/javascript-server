@@ -17,20 +17,17 @@ function isObject(value) {
   return (value && typeof value === "object") || value.constructor === Object;
 }
 
-export default function(config) 
-{
-  return function(req: Request, res: Response, next: NextFunction) 
-  {
+export default function(config) {
+  return function(req: Request, res: Response, next: NextFunction) {
     console.log("The config is", config);
     const arrayError = [];
 
     const configKeys = Object.keys(config);
-    console.log(configKeys);
+    //console.log(configKeys);
 
     console.log(req.method);
 
-    if (req.method.match("POST")) 
-    {
+    if (req.method.match("POST")) {
       const createKeys = Object.keys(config);
 
       console.log(createKeys);
@@ -42,7 +39,7 @@ export default function(config)
               console.log(`${element} is there`);
             } else {
               //console.log(arrayError.length);
-              arrayError.push(config[element].errorMessage.idError);
+              arrayError.push(config[element].errorMessage.Error);
             }
             if (isString(req[value][element])) {
               console.log(`${element} are of string type`);
@@ -62,8 +59,7 @@ export default function(config)
         });
       });
       console.log(req.body);
-    } 
-    else if (req.method.match("PUT")) {
+    } else if (req.method.match("PUT")) {
       const updateKeys = Object.keys(config);
       console.log(updateKeys);
       updateKeys.forEach(element => {
@@ -72,7 +68,7 @@ export default function(config)
             if (req[value][element]) {
               console.log(`${element} is there`);
             } else {
-              arrayError.push(config[element].errorMessage.idError);
+              arrayError.push(config[element].errorMessage.Error);
             }
             if (
               isString(req[value][element]) ||
@@ -86,8 +82,7 @@ export default function(config)
         });
       });
       console.log(req.body);
-    } 
-    else if (req.method.match("GET")) {
+    } else if (req.method.match("GET")) {
       const getKeys = Object.keys(config);
       getKeys.forEach(element => {
         config[element].in.map(value => {
@@ -104,8 +99,7 @@ export default function(config)
         });
       });
       console.log(req.query);
-    } 
-    else if (req.method.match("DELETE")) {
+    } else if (req.method.match("DELETE")) {
       const deleteKeys = Object.keys(config);
       console.log(deleteKeys);
       deleteKeys.forEach(element => {
@@ -115,13 +109,12 @@ export default function(config)
           if (req[value][element]) {
             console.log(`${element} is there`);
           } else {
-            arrayError.push(config[element].errorMessage.idError);
+            arrayError.push(config[element].errorMessage.Error);
           }
         });
       });
       console.log(req.params);
-    } 
-    else {
+    } else {
       console.log("error");
     }
 
