@@ -34,6 +34,7 @@
   "homepage": "https://github.com/vibhor-garg-98/express-server#readme",
   "dependencies": {
     "@types/express": "^4.17.2",
+    "@types/mongoose": "^5.7.0",
     "body-parser": "^1.19.0",
     "commitizen": "^4.0.3",
     "dotenv": "^8.2.0",
@@ -41,6 +42,7 @@
     "husky": "^4.2.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "mongoose": "^5.8.11",
     "nodemon": "^2.0.2",
     "tsc-watch": "^4.1.0"
   },
