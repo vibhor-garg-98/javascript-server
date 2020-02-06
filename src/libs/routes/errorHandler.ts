@@ -3,7 +3,7 @@ const errorHandler = (err: any, req: any, res: any, next: any) => {
   res.send({
     error: err.error,
     message: err.error,
-    status: err.error,
+    status: err.message || err,
     timestamp: new Date()
   });
 };

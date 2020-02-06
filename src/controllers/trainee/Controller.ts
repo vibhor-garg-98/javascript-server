@@ -48,7 +48,7 @@ class TraineeController {
     });
   };
 
-  deleted = (req: Request, res: Response) => {
+  delete = (req: Request, res: Response) => {
     console.log(':::::::::::::::::__INSIDE DELETED TRAINEE__:::::::::::::::');
     res.send({
       status: 'OK',
