@@ -1,4 +1,4 @@
-import hasPermission from './permissions';
+import hasPermission from '../../src/libs/routes/permissions';
 import validateUser from './validation';
 
 export { hasPermission };

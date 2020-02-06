@@ -20,6 +20,6 @@
     },
     },
     "exclude": ["dist"],
-    "include": ["src"],
+    "include": ["src", "extraTs/interface.ts", "extraTs/utils/permissions.ts", "extraTs/utils/constant.ts"],
     "types": ["src/types"]
     }
