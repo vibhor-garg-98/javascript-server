@@ -5,6 +5,8 @@ import errorHandler from './libs/routes/errorHandler';
 import notFoundRoutes from './libs/routes/notFoundRoute';
 import { Request } from 'express';
 import routes from './controllers/trainee/routes';
+import * as mongoose from 'mongoose';
+import Database from './libs/Database';
 
 interface User {
   name: string;
@@ -40,18 +42,18 @@ class Server {
   };
 
   run = (): void => {
-    const {
-      app,
-      config: { port }
-    } = this;
-
-    this.app.listen(this.config.port, err => {
-      if (err) {
-        console.log('error');
-        throw err;
-      }
-      console.log('App is running successfully on port ' + port);
-    });
+    const { app, config: { port, mongoDBUri } } = this;
+    Database.open(mongoDBUri).then(()=>{
+      this.app.listen(this.config.port, (err) => {
+        if (err) {
+          console.log('error');
+          throw err;
+        }
+        console.log('App is running successfully on port ' + port);
+        Database.disconnect();
+      });
+    })
+    
   };
 
   setupRoutes = (): Server => {

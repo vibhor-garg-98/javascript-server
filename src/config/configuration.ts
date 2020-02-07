@@ -5,6 +5,7 @@ config();
 const configuration: IConfig = Object.freeze({
   port: process.env.PORT,
   env: process.env.NODE_ENV,
-  secretKey: process.env.SECRETKEY
+  secretKey: process.env.SECRETKEY,
+  mongoDBUri:process.env.MONGO_URL
 });
 export default configuration;
