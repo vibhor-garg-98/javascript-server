@@ -3,7 +3,7 @@ import IUserModel from "./IUserModel";
 import { userModel } from "./UserModel";
 import IUserCreate from "../entities/IUserCreate";
 
-export class UserRepository {
+export default class UserRepository {
   private userModel: mongoose.Model<IUserModel>;
 
   constructor() {

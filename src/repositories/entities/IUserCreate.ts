@@ -4,5 +4,6 @@ export default interface IUserCreate {
   email: string;
   dob: Date;
   mobileNumber: number;
+  role: string;
   hobbies: string[];
 }

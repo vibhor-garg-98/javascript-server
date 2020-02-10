@@ -1,4 +1,4 @@
-import { UserRepository } from '../repositories/user/UserRepository';
+import  UserRepository  from '../repositories/user/UserRepository';
 
 const userRepository = new UserRepository();
 
@@ -9,6 +9,7 @@ export default () => {
     dob: new Date("12/27/1993"),
     email: "vinay@nodeexperts.com",
     mobileNumber: 9718223533,
+    role: "head-trainer",
     hobbies: ["Touring"]
   };
 

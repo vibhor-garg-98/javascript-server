@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
-import  {UserRepository}  from "./../../repositories/user/UserRepository";
+import UserRepository from "./../../repositories/user/UserRepository";
 import SystemResponse from "../../libs/SystemResponse";
+import IRequest from "../../libs/routes/IRequest";
+
 class UserController {
   static instance: UserController;
   static userRepository: UserRepository;
@@ -19,13 +21,21 @@ class UserController {
     try {
       console.log(" :::::::::: Inside Create User :::::::: ");
 
-      const { email, name, address, hobbies, dob, mobileNumber } = req.body;
+      const {
+        email,
+        name,
+        address,
+        hobbies,
+        dob,
+        mobileNumber,
+        role
+      } = req.body;
 
       this.userRepository
-        .create({ email, name, address, hobbies, dob, mobileNumber })
+        .create({ email, name, address, hobbies, dob, mobileNumber, role })
         .then(user => {
           console.log(user);
-          return SystemResponse.success( res, user, "User added successfully" );
+          return SystemResponse.success(res, user, "User added successfully");
         })
         .catch(error => {
           throw error;
@@ -36,8 +46,10 @@ class UserController {
   list = (req: Request, res: Response) => {
     try {
       console.log(" :::::::::: Inside List User :::::::: ");
-      
-      this.userRepository.list().then(user => {
+
+      this.userRepository
+        .list()
+        .then(user => {
           console.log(user);
           return SystemResponse.success(res, user, "Users Listed Successfully");
         })
@@ -57,7 +69,11 @@ class UserController {
             .findOne({ _id: id })
             .then(user => {
               console.log(user);
-              return SystemResponse.success(res, user, " User Updated successfully");
+              return SystemResponse.success(
+                res,
+                user,
+                " User Updated successfully"
+              );
             })
             .catch(error => {
               throw error;
@@ -81,7 +97,9 @@ class UserController {
         .catch(error => {
           throw error;
         });
-    } catch (err) {}
+    } catch (err) {
+      throw err;
+    }
   };
 }
 
