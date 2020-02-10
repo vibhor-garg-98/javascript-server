@@ -4,7 +4,7 @@ import * as bodyParser from 'body-parser';
 import errorHandler from './libs/routes/errorHandler';
 import notFoundRoutes from './libs/routes/notFoundRoute';
 import { Request } from 'express';
-import routes from './controllers/trainee/routes';
+import routes from './router';
 import * as mongoose from 'mongoose';
 import Database from './libs/Database';
 
@@ -50,7 +50,7 @@ class Server {
           throw err;
         }
         console.log('App is running successfully on port ' + port);
-        Database.disconnect();
+        //Database.disconnect();
       });
     })
     
