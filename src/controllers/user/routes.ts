@@ -12,7 +12,7 @@ userRouter.route('/')
     .post( validationHandler(validation.create),UserController.create)
     .put(authMiddleWare('getUsers','read' ) ,validationHandler(validation.update), UserController.update)
     .delete(authMiddleWare('getUsers','read' ) ,validationHandler(validation.delete), UserController.delete);
-    userRouter.delete('/user/:id', validationHandler(validation.delete), UserController.delete);
+    userRouter.delete('/:id', validationHandler(validation.delete), UserController.delete);
 
     userRouter.route('/me')
     .get(authMiddleWare('getUsers','read' ),(req: IRequest,res)=>{

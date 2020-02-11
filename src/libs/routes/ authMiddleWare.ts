@@ -19,6 +19,7 @@ export default (module, permissionType) => (
       permissionType
     );
     const token: string = req.headers.authorization;
+
     const { secretKey } = config;
 
     const decodeUser = jwt.verify(token, secretKey);
