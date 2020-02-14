@@ -26,7 +26,7 @@ function validate(config, req, res, next, value, element, arrayName) {
       : arrayName.push(config[element].errorMessage.regexError);
   }
   if (config[element].number) {
-    Number.isInteger(req[value][element])
+    !isNaN(req[value][element])
       ? (console.log(isNaN(req[value][element])),
         console.log(`${element} is of type number`),
         (req[value][element] = parseInt(req[value][element])))
