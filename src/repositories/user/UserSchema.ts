@@ -1,5 +1,4 @@
-import * as mongoose from "mongoose";
-import VersionableSchema from '../ versionable/VersionableSchema'
+import VersionableSchema from '../versionable/VersionableSchema';
 
 class UserSchema extends VersionableSchema {
   constructor(option) {
@@ -11,7 +10,8 @@ class UserSchema extends VersionableSchema {
       dob: Date,
       mobileNumber: Number,
       role: String,
-      hobbies: [String]
+      hobbies: [String],
+      password: String,
     };
     super(userSchema, option);
   }

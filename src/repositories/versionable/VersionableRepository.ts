@@ -1,6 +1,6 @@
-import * as mongoose from "mongoose";
+import * as mongoose from 'mongoose';
 
-class VersionableRepository<D extends mongoose.Document,M extends mongoose.Model<D>> {
+class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
   static generateObjectId() {
     return String(mongoose.Types.ObjectId());
   }
@@ -10,7 +10,7 @@ class VersionableRepository<D extends mongoose.Document,M extends mongoose.Model
     this.modelType = modelType;
   }
 
-  count(): mongoose.Query<Number> {
+  count(): mongoose.Query<number> {
     return this.modelType.countDocuments();
   }
 
@@ -52,7 +52,6 @@ class VersionableRepository<D extends mongoose.Document,M extends mongoose.Model
     return this.modelType.create({
         ...options.toObject(),
       originalID: options.originalID,
-      
       _id: id,
       createdBy: id,
       createdAt: new Date(),
