@@ -9,7 +9,7 @@ const userRouter = Router();
 
 userRouter.route('/')
     .get(authMiddleWare('getUsers','read' ) ,validationHandler(validation.get), UserController.list)
-    .post( validationHandler(validation.create),UserController.create)
+    .post(authMiddleWare('getUsers','read' ), validationHandler(validation.create),UserController.create)
     .put(authMiddleWare('getUsers','read' ) ,validationHandler(validation.update), UserController.update)
     .delete(authMiddleWare('getUsers','read' ) ,validationHandler(validation.delete), UserController.delete);
     userRouter.delete('/:id', validationHandler(validation.delete), UserController.delete);

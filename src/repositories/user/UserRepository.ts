@@ -2,36 +2,33 @@ import * as mongoose from "mongoose";
 import IUserModel from "./IUserModel";
 import { userModel } from "./UserModel";
 import IUserCreate from "../entities/IUserCreate";
+import VersionableRepository from "../ versionable/VersionableRepository";
 
-export default class UserRepository {
+export default class UserRepository extends VersionableRepository<IUserModel,mongoose.Model<IUserModel>> {
   private userModel: mongoose.Model<IUserModel>;
 
   constructor() {
+    super(userModel);
     this.userModel = userModel;
   }
 
-  create = (data: IUserCreate) => {
-    return this.userModel.create(data);
+  create = (data: any): Promise<IUserModel> => {
+    return super.create(data);
   };
 
-  count = () => {
-    //console.log("hello");
-    return this.userModel.countDocuments();
+  count = (): mongoose.Query<Number> => {
+    return super.count();
   };
 
   findOne = data => {
-    return this.userModel.findById(data);
-  };
-
-  update = (id, data) => {
-    return this.userModel.update(id, data);
+    return super.findOne(data);
   };
 
   list = () => {
-    return this.userModel.find();
+    return super.list();
   };
 
   delete = id => {
-    return this.userModel.findByIdAndDelete(id);
+    return super.delete(id);
   };
 }
