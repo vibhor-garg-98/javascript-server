@@ -119,6 +119,24 @@ const validation = {
           status: 500
         }
       }
+    },
+    role: {
+      required: true,
+      in: ["body"],
+      errorMessage: {
+        Error: {
+          error: "role is required",
+          message: "role is required",
+          timestamp: new Date(),
+          status: 500
+        },
+        typeError: {
+          error: "role should be of type string",
+          message: "role should be of type string",
+          timestamp: new Date(),
+          status: 500
+        }
+      }
     }
   },
   delete: {

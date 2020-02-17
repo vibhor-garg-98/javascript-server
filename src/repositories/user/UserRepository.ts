@@ -12,23 +12,26 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
     this.userModel = userModel;
   }
 
-  create = (data: any): Promise<IUserModel> => {
-    return super.create(data);
+  create = (data, userId): Promise<IUserModel> => {
+    return super.create(data, userId);
   };
 
-  count = (): mongoose.Query<number> => {
+  count = () => {
     return super.count();
   };
 
   findOne = data => {
     return super.findOne(data);
   };
+  update = (id, data, userId) => {
+    return super.update(id, data, userId);
+  }
 
-  list = () => {
-    return super.list();
+  list = (data, limit, skip) => {
+    return super.list(data, limit, skip);
   };
 
-  delete = id => {
-    return super.delete(id);
+  delete = (id, userId) => {
+    return super.delete(id, userId);
   };
 }

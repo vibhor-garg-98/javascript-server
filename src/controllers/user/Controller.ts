@@ -44,59 +44,58 @@ class UserController {
       }
     };
 
-    create = async (req: Request, res: Response) => {
-      try {
-        console.log(':::::::::: Inside Create User :::::::: ');
+    // create = async (req: IRequest, res: Response) => {
+    //   try {
+    //     console.log(':::::::::: Inside Create User :::::::: ');
 
-        const {email, name, address, hobbies, dob, mobileNumber, role} = req.body;
+    //     const {email, name, address, hobbies, dob, mobileNumber, role} = req.body;
 
-        const user = await this.userRepository.create({ email, name, address, hobbies, dob, mobileNumber, role});
-        console.log(user);
-        return SystemResponse.success(res, user, 'User added successfully');
-      } catch (err) {
-        throw err;
-      }
-    };
+    //     const user = await this.userRepository.create({ email, name, address, hobbies, dob, mobileNumber, role}, req.user);
+    //     console.log(user);
+    //     return SystemResponse.success(res, user, 'User added successfully');
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // };
 
-    list = async (req: Request, res: Response) => {
-      try {
-        console.log(' :::::::::: Inside List User :::::::: ');
+    // list = async (req: Request, res: Response) => {
+    //   try {
+    //     console.log(' :::::::::: Inside List User :::::::: ');
 
-        const user = await this.userRepository.list();
+    //     const user = await this.userRepository.list();
 
-        console.log(user);
-        return SystemResponse.success(res, user, 'Users Listed Successfully');
-      } catch (err) {
-        throw err;
-      }
-    };
-    update = async (req: Request, res: Response) => {
-      try {
-        console.log(' ::::::::: Inside Update Trainee :::::::: ');
-        const { id, dataToUpdate } = req.body;
-        const User = await this.userRepository.update({ _id: id }, dataToUpdate);
+    //     console.log(user);
+    //     return SystemResponse.success(res, user, 'Users Listed Successfully');
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // };
+    // update = async (req: IRequest, res: Response) => {
+    //   try {
+    //     console.log(' ::::::::: Inside Update Trainee :::::::: ');
+    //     const { id, dataToUpdate } = req.body;
+    //     const User = await this.userRepository.update({ _id: id }, dataToUpdate, req.user);
 
-        const user = await this.userRepository.findOne({ _id: id });
+    //     const user = await this.userRepository.findOne({ _id: id });
 
-        console.log(user);
-        return SystemResponse.success(res, user, ' User Updated successfully');
-      } catch (err) {
-        throw err;
-      }
-    };
-    delete = async (req: Request, res: Response) => {
-      try {
-        console.log(' :::::::::: Inside Delete User :::::::: ');
-        const { id } = req.params;
-        console.log(id);
-        const user = await this.userRepository.delete({ _id: id });
+    //     console.log(user);
+    //     return SystemResponse.success(res, user, ' User Updated successfully');
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // };
+    // delete = async (req: IRequest, res: Response) => {
+    //   try {
+    //     console.log(' :::::::::: Inside Delete User :::::::: ');
+    //     const { id } = req.params;
+    //     const user = await this.userRepository.delete({ _id: id }, req.user);
 
-        console.log(user);
-        return SystemResponse.success(res, user, 'User Deleted Successfully');
-      } catch (err) {
-        throw err;
-      }
-    };
+    //     console.log(user);
+    //     return SystemResponse.success(res, user, 'User Deleted Successfully');
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // };
 }
 
 export default UserController.getInstance();

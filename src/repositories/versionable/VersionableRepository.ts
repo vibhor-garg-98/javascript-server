@@ -10,65 +10,59 @@ class VersionableRepository<D extends mongoose.Document, M extends mongoose.Mode
     this.modelType = modelType;
   }
 
-  count(): mongoose.Query<number> {
-    return this.modelType.countDocuments();
+  public async count(): Promise<number> {
+    return await this.modelType.find({deletedAt: undefined}).count();
   }
 
-  findOne(query): mongoose.Query<D> {
-    return this.modelType.findOne(query);
+  public async findOne(query): Promise<D> {
+    return await this.modelType.findOne(query);
   }
 
-  public create(options): Promise<D> {
+  public async create(options, userId): Promise<D> {
     const id = VersionableRepository.generateObjectId();
 
-    return this.modelType.create({
+    return await this.modelType.create({
       ...options,
       _id: id,
       originalID: id,
-      createdBy: id
+      createdBy: userId._id
     });
   }
 
-  public update(id, data) {
-    this.modelType
-      .findById(id)
-      .then(user => {
+  public async update(id, data, userId): Promise<D> {
+    const user = await this.modelType.findById(id);
         const updatedData = Object.assign(user, data);
-        this.updateAndCreate(updatedData);
-      })
-      .catch(error => {
-        throw error;
-      });
+        await this.updateAndCreate(updatedData, userId);
     const deleteddata = {
-      deletedBy: id,
+      deletedBy: userId._id,
       deletedAt: new Date()
     };
-    return this.modelType.update(id, deleteddata);
+    return await this.modelType.update(id, deleteddata);
   }
 
-  public updateAndCreate(options) {
+  public async updateAndCreate(options, userId): Promise<D> {
     console.log(options);
     const id = VersionableRepository.generateObjectId();
-    return this.modelType.create({
+    return await this.modelType.create({
         ...options.toObject(),
       originalID: options.originalID,
       _id: id,
-      createdBy: id,
+      createdBy: userId._id,
       createdAt: new Date(),
       updatedAt: new Date(),
-      updatedBy: id
+      updatedBy: userId._id
     });
   }
 
-  public delete(id) {
+  public async delete(id, userId): Promise<D> {
     const deleteddata = {
-        deletedBy: id,
+        deletedBy: userId._id,
         deletedAt: new Date()
       };
-    return  this.modelType.update( id, deleteddata );
+    return await this.modelType.update( id, deleteddata );
   }
-  public list() {
-    return this.modelType.find({ deletedAt: undefined });
+  public async list(data, limit, skip): Promise<any> {
+    return await this.modelType.find(data).limit(limit).skip(skip);
   }
 }
 export default VersionableRepository;
