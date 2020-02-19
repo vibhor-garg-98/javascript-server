@@ -9,7 +9,10 @@ class UserSchema extends VersionableSchema {
       email: String,
       dob: Date,
       mobileNumber: Number,
-      role: String,
+      role: {
+        type: String,
+        default: 'trainee'
+      },
       hobbies: [String],
       password: String,
     };
