@@ -7,6 +7,8 @@ import { Request } from 'express';
 import routes from './router';
 import * as mongoose from 'mongoose';
 import Database from './libs/Database';
+import * as swaggerUI from 'swagger-ui-express';
+import * as swaggerJsDoc from 'swagger-jsdoc';
 
 interface User {
   name: string;
@@ -41,24 +43,46 @@ class Server {
     app.use(bodyParser.json());
   };
 
+  public initSwagger = () => {
+    const options = {
+      definition: {
+        info: {
+          title: 'Javascript-Express-API-Training',
+          version: '1.0.0',
+        },
+        securityDefinitions: {
+          Bearer: {
+          type: 'apiKey',
+          name: 'Authorization',
+          in: 'headers'
+        }
+      },
+      basePath: '/api',
+    },
+      swagger: '2.0',
+      apis: ['./dist/controllers/**/routes.js'],
+    };
+    const swaggerSpec = swaggerJsDoc(options);
+    return swaggerSpec;
+  }
+
   run = (): void => {
     const { app, config: { port, mongoDBUri } } = this;
-    Database.open(mongoDBUri).then(()=>{
+    Database.open(mongoDBUri).then(() => {
       this.app.listen(this.config.port, (err) => {
         if (err) {
           console.log('error');
           throw err;
         }
         console.log('App is running successfully on port ' + port);
-        //Database.disconnect();
+        // Database.disconnect();
       });
-    })
-    
+    });
   };
 
   setupRoutes = (): Server => {
     const { app } = this;
-
+    app.use('/swagger', swaggerUI.serve, swaggerUI.setup(this.initSwagger()));
     this.app.get(
       '/health-check',
       (req: express.Request, res: express.Response) => {

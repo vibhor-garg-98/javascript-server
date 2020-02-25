@@ -14,7 +14,7 @@ export default async () => {
     name: 'Head Trainer',
     address: 'Noida',
     dob: new Date('12/27/1993'),
-    email: 'vinay@nodeexperts.com',
+    email: 'vinay@successive.tech',
     mobileNumber: 9718223533,
     role: 'head-trainer',
     hobbies: ['Touring']

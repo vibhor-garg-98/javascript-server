@@ -27,8 +27,8 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
     return super.update(id, data, userId);
   }
 
-  list = (data, limit, skip) => {
-    return super.list(data, limit, skip);
+  list = (data, limit, skip, sortData) => {
+    return super.list(data, limit, skip, sortData);
   };
 
   delete = (id, userId) => {
