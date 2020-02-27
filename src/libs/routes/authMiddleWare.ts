@@ -24,7 +24,7 @@ export default (module, permissionType) => ( req: IRequest, res: Response, next:
     }
     const { id, email } = decodeUser;
     userRepository
-      .findOne({ _id: id, email: email })
+      .findOne({ _id: id, email: email, deletedAt: undefined })
       .then(user => {
         if (!user) {
           next({

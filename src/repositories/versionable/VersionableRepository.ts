@@ -30,7 +30,7 @@ class VersionableRepository<D extends mongoose.Document, M extends mongoose.Mode
   }
 
   public async update(id, data, userId): Promise<D> {
-    const user = await this.modelType.findById(id);
+    const user = await this.modelType.findOne(id);
         const updatedData = Object.assign(user, data);
         await this.updateAndCreate(updatedData, userId);
     const deleteddata = {
@@ -61,8 +61,8 @@ class VersionableRepository<D extends mongoose.Document, M extends mongoose.Mode
       };
     return await this.modelType.update( id, deleteddata );
   }
-  public async list(data, limit, skip): Promise<any> {
-    return await this.modelType.find(data).limit(limit).skip(skip);
+  public async list(data, limit, skip, sortData): Promise<any> {
+    return await this.modelType.find(data).limit(limit).skip(skip).sort(sortData);
   }
 }
 export default VersionableRepository;

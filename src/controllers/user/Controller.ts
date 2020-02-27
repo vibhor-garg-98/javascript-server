@@ -18,10 +18,12 @@ class UserController {
       UserController.instance = new UserController();
       return UserController.instance;
     };
+
     me = (req: IRequest, res: Response, next: NextFunction) => {
       /*console.log('Inside me routes');*/
       res.send(req.user);
     };
+
     login = async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { email, password } = req.body;
@@ -43,59 +45,6 @@ class UserController {
         throw err;
       }
     };
-
-    // create = async (req: IRequest, res: Response) => {
-    //   try {
-    //     console.log(':::::::::: Inside Create User :::::::: ');
-
-    //     const {email, name, address, hobbies, dob, mobileNumber, role} = req.body;
-
-    //     const user = await this.userRepository.create({ email, name, address, hobbies, dob, mobileNumber, role}, req.user);
-    //     console.log(user);
-    //     return SystemResponse.success(res, user, 'User added successfully');
-    //   } catch (err) {
-    //     throw err;
-    //   }
-    // };
-
-    // list = async (req: Request, res: Response) => {
-    //   try {
-    //     console.log(' :::::::::: Inside List User :::::::: ');
-
-    //     const user = await this.userRepository.list();
-
-    //     console.log(user);
-    //     return SystemResponse.success(res, user, 'Users Listed Successfully');
-    //   } catch (err) {
-    //     throw err;
-    //   }
-    // };
-    // update = async (req: IRequest, res: Response) => {
-    //   try {
-    //     console.log(' ::::::::: Inside Update Trainee :::::::: ');
-    //     const { id, dataToUpdate } = req.body;
-    //     const User = await this.userRepository.update({ _id: id }, dataToUpdate, req.user);
-
-    //     const user = await this.userRepository.findOne({ _id: id });
-
-    //     console.log(user);
-    //     return SystemResponse.success(res, user, ' User Updated successfully');
-    //   } catch (err) {
-    //     throw err;
-    //   }
-    // };
-    // delete = async (req: IRequest, res: Response) => {
-    //   try {
-    //     console.log(' :::::::::: Inside Delete User :::::::: ');
-    //     const { id } = req.params;
-    //     const user = await this.userRepository.delete({ _id: id }, req.user);
-
-    //     console.log(user);
-    //     return SystemResponse.success(res, user, 'User Deleted Successfully');
-    //   } catch (err) {
-    //     throw err;
-    //   }
-    // };
 }
 
 export default UserController.getInstance();

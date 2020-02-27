@@ -21,7 +21,7 @@ function validate(config, req, res, next, value, element, arrayName) {
       : arrayName.push(config[element].errorMessage.typeError);
   }
   if (config[element].regex) {
-    config.name.regex.test(req[value][element])
+    config[element].regex.test(req[value][element])
       ? console.log("Regex validation is right")
       : arrayName.push(config[element].errorMessage.regexError);
   }
@@ -49,10 +49,10 @@ function validate(config, req, res, next, value, element, arrayName) {
   if (config[element].array) {
     const identify = config[element].array;
     if (Array.isArray(req[value][element])) {
-        console.log(`element sholud not be type of ${identify}`);
+      console.log(`element sholud not be type of ${identify}`);
     }
-
-}}
+  }
+}
 
 export default function(config) {
   return function(req: Request, res: Response, next: NextFunction) {

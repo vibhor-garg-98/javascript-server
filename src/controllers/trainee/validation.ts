@@ -2,7 +2,7 @@ const validation = {
   create: {
     name: {
       required: true,
-      regex: /^[A-Z][a-z]{2,30}$/,
+      regex: /([a-zA-Z])+ ?([a-zA-Z])+$/,
       in: ["body"],
       errorMessage: {
         Error: {
@@ -65,12 +65,19 @@ const validation = {
     },
     email: {
       required: true,
+      regex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((successive.tech))$/,
       string: true,
       in: ["body"],
       errorMessage: {
         Error: {
           error: "Email is required",
           message: "Email is required",
+          timestamp: new Date(),
+          status: 500
+        },
+        regexError: {
+          error: "Regex did not match",
+          message: "Regex did not match",
           timestamp: new Date(),
           status: 500
         },
@@ -137,7 +144,7 @@ const validation = {
           status: 500
         }
       }
-    },
+    }
   },
   delete: {
     id: {
@@ -177,6 +184,57 @@ const validation = {
         typeError: {
           error: "Limit should be of type number",
           message: "Limit should be of type number",
+          timestamp: new Date(),
+          status: 500
+        }
+      }
+    },
+    email: {
+      required: false,
+     
+      string: true,
+      in: ["body"],
+      errorMessage: {
+        Error: {
+          error: "Email is required",
+          message: "Email is required",
+          timestamp: new Date(),
+          status: 500
+        },
+        regexError: {
+          error: "Regex did not match",
+          message: "Regex did not match",
+          timestamp: new Date(),
+          status: 500
+        },
+        typeError: {
+          error: " Email should be of type string",
+          message: "Email should be of type string",
+          timestamp: new Date(),
+          status: 500
+        }
+      }
+    },
+    name: {
+      required: false,
+      regex: /([a-zA-Z])+ ?([a-zA-Z])+$/,
+      in: ["body"],
+      errorMessage: {
+        Error: {
+          error: "Name is required",
+          message: "Name is required",
+          timestamp: new Date(),
+          status: 500
+        },
+        regexError: {
+          error: "Regex did not match",
+          message: "Regex did not match",
+          timestamp: new Date(),
+          status: 500
+        },
+        typeError: {
+          error: "Name should be of type string",
+          message: "Name should be of type string",
           timestamp: new Date(),
           status: 500
         }
