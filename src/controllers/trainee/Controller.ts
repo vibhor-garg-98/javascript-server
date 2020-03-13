@@ -74,11 +74,13 @@ class TraineeController {
           sortData = { createdAt: -1 };
           // console.log(search);
       if (search) {
-        const searching = search.split(':');
-        console.log(searching);
-        const user = await this.userRepository.list({[searching[0]]: [searching[1]], deletedAt: undefined}, limit, skip, sortData);
+        // const searching = search.split(':');
+        // console.log(searching);
+        const user = await this.userRepository.list({name: { $regex: search, $options: 'i'}, deletedAt: undefined}, limit, skip, sortData);
+        const list = await this.userRepository.list({email: { $regex: search, $options: 'i'}, deletedAt: undefined}, limit, skip, sortData);
+        const users = {...user, ...list};
         // console.log(user);
-        if (this.isEmpty(user)) {
+        if (this.isEmpty(users)) {
           return next({
               error: 'No user found',
               message: 'No user found',
@@ -87,7 +89,7 @@ class TraineeController {
            });
         }
        // console.log(typeof user);
-        return SystemResponse.success(res, { Total_count: counts, ...user}, 'Trainee Listed Successfully');
+        return SystemResponse.success(res, { Total_count: counts, ...users}, 'Trainee Listed Successfully');
       }
       else {
         const user = await this.userRepository.list({deletedAt: undefined}, limit, skip, sortData);
