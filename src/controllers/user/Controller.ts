@@ -19,7 +19,7 @@ class UserController {
     };
 
     me = (req: IRequest, res: Response, next: NextFunction) => {
-      /*console.log('Inside me routes');*/
+
       res.send(req.user);
     };
 

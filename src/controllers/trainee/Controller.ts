@@ -44,7 +44,7 @@ class TraineeController {
       bcrypt.hash(config.password, 10, (err, hash) => {
         password = hash;
         const user = this.userRepository.create({ email: emailLowerCase, name, address, hobbies, dob, mobileNumber, role, password}, req.user).then( user => {
-        // console.log(user);
+
           if (!user) {
             return next({
               error: 'error in creatation',
@@ -72,14 +72,12 @@ class TraineeController {
           sortData = { name: 1 };
           else
           sortData = { createdAt: -1 };
-          // console.log(search);
+
       if (search) {
-        // const searching = search.split(':');
-        // console.log(searching);
         const user = await this.userRepository.list({name: { $regex: search, $options: 'i'}, deletedAt: undefined}, limit, skip, sortData);
         const list = await this.userRepository.list({email: { $regex: search, $options: 'i'}, deletedAt: undefined}, limit, skip, sortData);
         const users = {...user, ...list};
-        // console.log(user);
+
         if (this.isEmpty(users)) {
           return next({
               error: 'No user found',
@@ -88,7 +86,7 @@ class TraineeController {
               status: 500
            });
         }
-       // console.log(typeof user);
+
         return SystemResponse.success(res, { Total_count: counts, ...users}, 'Trainee Listed Successfully');
       }
       else {
@@ -106,7 +104,7 @@ class TraineeController {
       const { id } = req.params;
       const user = await this.userRepository.delete({ originalID: id }, req.user);
 
-      // console.log(user);
+
       return SystemResponse.success(res, user, 'Trainee Deleted Successfully');
     } catch (err) {
       throw err;
@@ -122,7 +120,7 @@ class TraineeController {
 
         const user = await this.userRepository.findOne({ originalID: id, deletedAt: undefined });
 
-        // console.log(user);
+
         return SystemResponse.success(res, user, ' Trainee Updated successfully');
       } else {
         return next({
