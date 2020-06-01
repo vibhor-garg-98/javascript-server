@@ -42,10 +42,7 @@ function validate(config, req, res, next, value, element, arrayName) {
       ? console.log(`${element} is of type`)
       : arrayName.push(config[element].errorMessage.typeError);
   }
-  // if(config[element].custom){
-  // //add tomorrow;
-  // config[element].custom(req[value][element]);
-  // }
+
   if (config[element].array) {
     const identify = config[element].array;
     if (Array.isArray(req[value][element])) {

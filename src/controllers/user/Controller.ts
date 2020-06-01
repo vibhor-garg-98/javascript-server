@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import UserRepository from './../../repositories/user/UserRepository';
-import SystemResponse from '../../libs/SystemResponse';
 import config from '../../config/configuration';
 import IRequest from '../../libs/routes/IRequest';
 import * as bcrypt from 'bcrypt';
@@ -20,7 +19,7 @@ class UserController {
     };
 
     me = (req: IRequest, res: Response, next: NextFunction) => {
-      /*console.log('Inside me routes');*/
+
       res.send(req.user);
     };
 

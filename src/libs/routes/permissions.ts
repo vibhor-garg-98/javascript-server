@@ -1,4 +1,4 @@
-import { permissions } from "./constant";
+import { permissions } from './constant';
 export default function hasPermission(
   moduleName: string,
   role: string,

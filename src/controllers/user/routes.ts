@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import  UserController from './Controller';
 import  validationHandler  from '../../libs/routes/validationHandler';
-import validation from './validation' ;
+import validation from './validation';
 import authMiddleWare from '../../libs/routes/authMiddleWare';
 
 const userRouter = Router();
@@ -49,6 +49,19 @@ userRouter.route('/');
  *           description: success
  *           schema:
  *              $ref: '#/definitions/TraineeResponse'
+ *         422:
+ *            description: Unauthorised access
+ *            schema:
+ *              oneOf:
+ *              properties:
+ *                  error:
+ *                      example: Unauthorized
+ *                  message:
+ *                      example: Token not found
+ *                  status:
+ *                      example: 403
+ *                  timestamp:
+ *                      example: 2020-02-24 10:58:40.385Z
  */
 
     userRouter.route('/me').get(authMiddleWare('getUsers', 'read'), UserController.me );
